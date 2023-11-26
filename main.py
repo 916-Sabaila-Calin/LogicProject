@@ -1,11 +1,11 @@
 import user_interface as ui
 
 def main():
-    x = ui.InputInt()
-    y = ui.InputInt()
-    print(x + y)
-    print(x + y)
-    x = ui.InputInt()
+    while True:
+        ui.PrintMenu()
+        option = ui.InputString()
+        ui.HandleOptions(option)
+
 
 if __name__ == "__main__":
     main()
