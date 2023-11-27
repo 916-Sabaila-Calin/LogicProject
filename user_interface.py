@@ -10,23 +10,18 @@ def PrintMenu():
 
 
 def HandleOptions(option: str):
-    try:
-        if option == "1":
-            base = InputBase()
-            x = InputNumber(1)
-            y = InputNumber(2)
+    if option == "1":
+        base = InputBase()
+        x = InputFirstNumber()
+        y = InputSecondNumber()
 
-            result = functions.AddNumbers(base, x, y)
-            OutputString(result)
+        functions.ManageAddNumbers(x, y, base)
 
-        elif option == "exit":
-            exit()
+    elif option == "exit":
+        exit()
 
-        else:
-            raise Exception(HandleErrors(1))
-
-    except Exception as exception:
-        OutputString(str(exception))
+    else:
+        OutputString(HandleErrors(1))
 
 
 def HandleErrors(errorCode: int) -> str:
@@ -37,48 +32,40 @@ def HandleErrors(errorCode: int) -> str:
     elif errorCode == 2:
         string += "The base is not between 2 and 16!"
     elif errorCode == 3:
+        string += "The digits of the number cannot be higher or equal to the base!"
+    elif errorCode == 4:
         pass
 
     return string
 
 
-def InputBase() -> int:
+def InputBase():
     OutputString("")
     OutputString("Enter the base in which the operation will take place.")
 
     base = InputString()
-    base = int(base)
-
-    if base < 2 or base > 16:
-        raise Exception(HandleErrors(2))
-
     return base
 
 
-def HandlePrintingForInputNumber(option: int):
+def InputFirstNumber() -> str:
     OutputString("")
-    if option == 1:
-        OutputString("Enter the first number.")
-    elif option == 2:
-        OutputString("Enter the second number.")
+    OutputString("Enter the first number.")
 
-
-def InputNumber(option: int) -> float:
-    HandlePrintingForInputNumber(option)
     number = InputString()
-    number = float(number)
+    return number
+
+
+def InputSecondNumber() -> str:
+    OutputString("")
+    OutputString("Enter the second number.")
+
+    number = InputString()
     return number
 
 
 def InputString() -> str:
     string = input()
     return string
-
-
-def InputInt() -> int:
-    x = InputString()
-    x = int(x)
-    return x
 
 
 def OutputString(string: str):
