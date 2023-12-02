@@ -15,11 +15,11 @@ def PrintMenu():
 def HandleOptions(option: str):
     try:
         if option == "1":
-            OutputString(functions.ManageAddNumbers())
+            OutputString("The result is: " + functions.ManageAddNumbers())
         elif option == "2":
             pass
         elif option == "3":
-            OutputString(functions.ManageMultiplyNumbers())
+            OutputString("The result is: " + functions.ManageMultiplyNumbers())
         elif option == "4":
             pass
         elif option == "exit":
@@ -48,12 +48,28 @@ def HandleErrors(errorCode: int) -> str:
     return string
 
 
-def InputBase():
+def InputBase() -> str:
     OutputString("")
     OutputString("Enter the base in which the operation will take place.")
 
     base = InputString()
     return base
+
+
+def InputSourceBase() -> str:
+    OutputString("")
+    OutputString("Enter the source base.")
+
+    sourceBase = InputString()
+    return sourceBase
+
+
+def InputDestinationBase() -> str:
+    OutputString("")
+    OutputString("Enter the destination base.")
+
+    destinationBase = InputString()
+    return destinationBase
 
 
 def InputFirstNumber() -> str:
