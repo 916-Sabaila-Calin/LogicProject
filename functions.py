@@ -2,20 +2,87 @@ import user_interface as ui
 
 
 def AddNumbers(x: str, y: str, base: int) -> str:
-    pass
+    # The two numbers are represented using two arrays
+    num1, num2 = [], []
+    for i in range(len(x) - 1, -1, -1):
+        num1.append(x[i])
+    for i in range(len(y) - 1, -1, -1):
+        num2.append(y[i])
+
+    length = max(len(num1), len(num2))
+    carry = 0
+    ans = ""
+    for i in range(length):
+        temp = 0
+        if i < len(num1):
+            temp += HexaToDecimal(num1[i])
+        if i < len(num2):
+            temp += HexaToDecimal(num2[i])
+        temp += carry
+
+        if carry > 0:
+            carry = 0
+
+        carry = temp // base
+        ans += DecimalToHexa(temp % base)
+
+    if carry > 0:
+        ans += DecimalToHexa(carry)
+
+    ans = ans[::-1]  # Reversing the string
+    return ans
 
 
-def ManageAddNumbers(x: str, y: str, base: str):
-    try:
-        ValidateBase(base)
-        base = int(base)
+def MultiplyNumbers(x: str, y: str, base: int) -> str:
+    # Making sure that y is the operand with one digit
+    if len(y) > 1:
+        x, y = y, x  # Swap
 
-        ValidateNumber(x, base)
-        ValidateNumber(y, base)
+    ans = ""
+    carry = 0
+    for i in range(len(x) - 1, -1, -1):
+        temp = HexaToDecimal(x[i]) * HexaToDecimal(y) + carry
 
-        AddNumbers(x, y, base)
-    except Exception as exception:
-        ui.OutputString(str(exception))
+        if carry > 0:
+            carry = 0
+
+        carry = temp // base
+        ans += DecimalToHexa(temp % base)
+
+    if carry > 0:
+        ans += DecimalToHexa(carry)
+
+    ans = ans[::-1]
+    return ans
+
+
+def ManageAddNumbers() -> str:
+    base = ui.InputBase()
+    x = ui.InputFirstNumber()
+    y = ui.InputSecondNumber()
+
+    ValidateBase(base)
+    base = int(base)
+    ValidateNumber(x, base)
+    ValidateNumber(y, base)
+
+    ans = AddNumbers(x, y, base)
+    return ans
+
+
+def ManageMultiplyNumbers() -> str:
+    base = ui.InputBase()
+    x = ui.InputFirstNumber()
+    y = ui.InputSecondNumber()
+
+    ValidateBase(base)
+    base = int(base)
+    ValidateNumber(x, base)
+    ValidateNumber(y, base)
+    ValidateOperands(x, y)
+
+    ans = MultiplyNumbers(x, y, base)
+    return ans
 
 
 def ValidateNumber(number: str, base: int):
@@ -41,6 +108,11 @@ def ValidateBase(base: str):
         raise Exception(ui.HandleErrors(2))
 
 
+def ValidateOperands(x: str, y: str):
+    if len(x) > 1 and len(y) > 1:
+        raise Exception(ui.HandleErrors(4))
+
+
 def HexaToDecimal(string: str) -> int:
     if '0' <= string and string <= '9':
         return int(string)
@@ -56,3 +128,20 @@ def HexaToDecimal(string: str) -> int:
         return 14
     elif string == 'F' or string == 'f':
         return 15
+
+
+def DecimalToHexa(num: int) -> str:
+    if 0 <= num and num <= 9:
+        return str(num)
+    elif num == 10:
+        return 'A'
+    elif num == 11:
+        return 'B'
+    elif num == 12:
+        return 'C'
+    elif num == 13:
+        return 'D'
+    elif num == 14:
+        return 'E'
+    elif num == 15:
+        return 'F'

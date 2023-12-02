@@ -5,23 +5,30 @@ import functions as functions
 
 def PrintMenu():
     OutputString("")
-    OutputString("Press 1 if you want to add two numbers.")
+    OutputString("Press 1 to add two numbers.")
+    OutputString("Press 2 to subtract two numbers.")
+    OutputString("Press 3 to multiply two numbers.")
+    OutputString("Press 4 to divide two numbers.")
     OutputString("Type \"exit\" to close the application.")
 
 
 def HandleOptions(option: str):
-    if option == "1":
-        base = InputBase()
-        x = InputFirstNumber()
-        y = InputSecondNumber()
+    try:
+        if option == "1":
+            OutputString(functions.ManageAddNumbers())
+        elif option == "2":
+            pass
+        elif option == "3":
+            OutputString(functions.ManageMultiplyNumbers())
+        elif option == "4":
+            pass
+        elif option == "exit":
+            exit()
+        else:
+            raise Exception(HandleErrors(1))
 
-        functions.ManageAddNumbers(x, y, base)
-
-    elif option == "exit":
-        exit()
-
-    else:
-        OutputString(HandleErrors(1))
+    except Exception as exception:
+        OutputString(str(exception))
 
 
 def HandleErrors(errorCode: int) -> str:
@@ -34,6 +41,8 @@ def HandleErrors(errorCode: int) -> str:
     elif errorCode == 3:
         string += "The digits of the number cannot be higher or equal to the base!"
     elif errorCode == 4:
+        string += "At least one of the operands should have one digit!"
+    elif errorCode == 5:
         pass
 
     return string
