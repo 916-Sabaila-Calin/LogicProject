@@ -3,7 +3,6 @@ import user_interface as ui
 import tests as tests
 
 
-# Săbăilă Călin-Ioan, Group: 916
 def main():
     ui.OutputString("Săbăilă Călin-Ioan, Group: 916")
 
@@ -15,5 +14,6 @@ def main():
         ui.HandleOptions(option)
 
 
+# Săbăilă Călin-Ioan, Group: 916
 if __name__ == "__main__":
     main()

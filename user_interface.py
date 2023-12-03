@@ -9,6 +9,7 @@ def PrintMenu():
     OutputString("Press 2 to subtract two numbers.")
     OutputString("Press 3 to multiply two numbers.")
     OutputString("Press 4 to divide two numbers.")
+    OutputString("Press 5 to convert numbers using successive divisions.")
     OutputString("Type \"exit\" to close the application.")
 
 
@@ -17,10 +18,12 @@ def HandleOptions(option: str):
         if option == "1":
             OutputString("The result is: " + functions.ManageAddNumbers())
         elif option == "2":
-            pass
+            OutputString("The result is: " + functions.ManageSubtractNumbers())
         elif option == "3":
             OutputString("The result is: " + functions.ManageMultiplyNumbers())
         elif option == "4":
+            pass
+        elif option == "5":
             pass
         elif option == "exit":
             exit()

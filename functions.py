@@ -33,10 +33,90 @@ def AddNumbers(x: str, y: str, base: int) -> str:
     return ans
 
 
+def ManageAddNumbers() -> str:
+    base = ui.InputBase()
+    x = ui.InputFirstNumber()
+    y = ui.InputSecondNumber()
+
+    ValidateBase(base)
+    base = int(base)
+    ValidateNumber(x, base)
+    ValidateNumber(y, base)
+
+    ans = AddNumbers(x, y, base)
+    return ans
+
+
+def SubtractNumbers(x: str, y: str, base: int) -> str:
+    if x == y:
+        return '0'
+
+    # Checking if the result is negative
+    isNegative = False
+    if len(x) < len(y) or (len(x) == len(y) and x < y):
+        x, y = y, x  # Swap
+        isNegative = True
+
+    li_x, li_y = [], []
+    for i in range(len(x)):
+        li_x.append(x[i])
+    for i in range(len(y)):
+        li_y.append(y[i])
+
+    carry = 0
+    ans = ""
+    while len(li_x) > 0:
+        ld_x = li_x[-1]
+        li_x.pop()
+
+        ld_y = '0'
+        if len(li_y) > 0:
+            ld_y = li_y[-1]
+            li_y.pop()
+
+        ld_x = HexaToDecimal(ld_x)
+        ld_y = HexaToDecimal(ld_y)
+
+        temp = ld_x - ld_y + carry
+        if temp < 0:
+            carry = -1
+            temp += base
+        else:
+            carry = 0
+
+        temp = DecimalToHexa(temp)
+        ans = temp + ans
+
+    ans = ans.lstrip("0")
+
+    if isNegative == True:
+        ans = "-" + ans
+
+    return ans
+
+
+def ManageSubtractNumbers() -> str:
+    base = ui.InputBase()
+    x = ui.InputFirstNumber()
+    y = ui.InputSecondNumber()
+
+    ValidateBase(base)
+    base = int(base)
+    ValidateNumber(x, base)
+    ValidateNumber(y, base)
+
+    ans = SubtractNumbers(x, y, base)
+    return ans
+
+
 def MultiplyNumbers(x: str, y: str, base: int) -> str:
     # Making sure that y is the operand with one digit
     if len(y) > 1:
         x, y = y, x  # Swap
+
+    # Returning 0 when multiplying by 0
+    if y == '0':
+        return '0'
 
     ans = ""
     carry = 0
@@ -56,20 +136,6 @@ def MultiplyNumbers(x: str, y: str, base: int) -> str:
     return ans
 
 
-def ManageAddNumbers() -> str:
-    base = ui.InputBase()
-    x = ui.InputFirstNumber()
-    y = ui.InputSecondNumber()
-
-    ValidateBase(base)
-    base = int(base)
-    ValidateNumber(x, base)
-    ValidateNumber(y, base)
-
-    ans = AddNumbers(x, y, base)
-    return ans
-
-
 def ManageMultiplyNumbers() -> str:
     base = ui.InputBase()
     x = ui.InputFirstNumber()
@@ -86,17 +152,16 @@ def ManageMultiplyNumbers() -> str:
 
 
 def ValidateNumber(number: str, base: int):
+    if number[0] == '0' and len(number) > 1:
+        raise Exception(ui.HandleErrors(1))
+
     for i in range(len(number)):
         if (number[i] != '0' and number[i] != '1' and number[i] != '2' and number[i] != '3' and number[i] != '4' and
             number[i] != '5' and number[i] != '6' and number[i] != '7' and number[i] != '8' and number[i] != '9' and
             number[i] != 'A' and number[i] != 'B' and number[i] != 'C' and number[i] != 'D' and number[i] != 'E' and
             number[i] != 'F' and number[i] != 'a' and number[i] != 'b' and number[i] != 'c' and number[i] != 'd' and
-            number[i] != 'e' and number[i] != 'f' and number[i] != '-' and number[i] != '.') == True:
+            number[i] != 'e' and number[i] != 'f') == True:
             raise Exception(ui.HandleErrors(1))
-
-    for i in range(len(number)):
-        if number[i] == '-' or number[i] == '.':  # For negative numbers and decimal numbers
-            continue
 
         if HexaToDecimal(number[i]) >= base:
             raise Exception(ui.HandleErrors(3))
