@@ -10,6 +10,7 @@ def PrintMenu():
     OutputString("Press 3 to multiply two numbers.")
     OutputString("Press 4 to divide two numbers.")
     OutputString("Press 5 to convert numbers using successive divisions.")
+    OutputString("Press 7 to convert numbers using rapid conversions.")
     OutputString("Type \"exit\" to close the application.")
 
 
@@ -24,6 +25,10 @@ def HandleOptions(option: str):
         elif option == "4":
             pass
         elif option == "5":
+            pass
+        elif option == "6":
+            pass
+        elif option == "7":
             pass
         elif option == "exit":
             exit()
@@ -46,6 +51,10 @@ def HandleErrors(errorCode: int) -> str:
     elif errorCode == 4:
         string += "At least one of the operands should have one digit!"
     elif errorCode == 5:
+        string += "The source base should be greater or equal than the destination base!"
+    elif errorCode == 6:
+        pass
+    elif errorCode == 7:
         pass
 
     return string

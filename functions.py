@@ -151,6 +151,35 @@ def ManageMultiplyNumbers() -> str:
     return ans
 
 
+def SuccessiveDivisions():
+    pass
+
+
+def ManageSuccessiveDivisions() -> str:
+    sourceBase = ui.InputSourceBase()
+    destinationBase = ui.InputDestinationBase()
+    x = ui.InputFirstNumber()
+
+    ValidateBase(sourceBase)
+    ValidateBase(destinationBase)
+    sourceBase = int(sourceBase)
+    destinationBase = int(destinationBase)
+    ValidateBasesForSuccessiveDivisions(sourceBase, destinationBase)
+    ValidateNumber(x, sourceBase)
+
+    ans = ""
+    return ans
+
+
+def ToBase10(x: str, sourceBase: int) -> str:
+    ans, pow = 0, 1
+    for i in range(len(x) - 1, -1, -1):
+        ans = ans + pow * HexaToDecimal(x[i])
+        pow *= sourceBase
+
+    return str(ans)
+
+
 def ValidateNumber(number: str, base: int):
     if number[0] == '0' and len(number) > 1:
         raise Exception(ui.HandleErrors(1))
@@ -171,6 +200,11 @@ def ValidateBase(base: str):
     base = int(base)
     if base < 2 or base > 17:
         raise Exception(ui.HandleErrors(2))
+
+
+def ValidateBasesForSuccessiveDivisions(sourceBase: int, destinationBase: int):
+    if sourceBase < destinationBase:
+        raise Exception(ui.HandleErrors(5))
 
 
 def ValidateOperands(x: str, y: str):
