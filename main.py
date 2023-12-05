@@ -1,12 +1,10 @@
-import functions
+import functions as functions
 import user_interface as ui
 import tests as tests
 
 
 def main():
     ui.OutputString("Săbăilă Călin-Ioan, Group: 916")
-
-    print(functions.ConvertUsingSubstitutionMethod("4A", 15, 16))
 
     tests.RunAllTests()
 

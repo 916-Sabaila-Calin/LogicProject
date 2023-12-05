@@ -8,6 +8,7 @@ def RunAllTests():
 
     TestConvertUsing10AsIntermediaryBase()
     TestConvertUsingSubstitutionMethod()
+    TestConvertUsingRapidConversions()
 
     TestBaseXToBase10()
     TestBase10ToBaseX()
@@ -39,7 +40,7 @@ def TestSubtractNumbers():
 
 def TestConvertUsing10AsIntermediaryBase():
     assert functions.ConvertUsing10AsIntermediaryBase("25341321", 6, 12) == "337841"
-    assert functions.ConvertUsing10AsIntermediaryBase("2643572", 10, 10) == "2643572"
+    assert functions.ConvertUsing10AsIntermediaryBase("10101010101", 2, 2) == "10101010101"
     assert functions.ConvertUsing10AsIntermediaryBase("101010101101110101", 2, 16) == "2AB75"
     assert functions.ConvertUsing10AsIntermediaryBase("5345261151", 8, 14) == "6D180105"
     assert functions.ConvertUsing10AsIntermediaryBase("613472A", 11, 3) == "202101202102121"
@@ -51,6 +52,14 @@ def TestConvertUsingSubstitutionMethod():
     assert functions.ConvertUsingSubstitutionMethod("76254313232", 8, 12) == "1755BA378A"
     assert functions.ConvertUsingSubstitutionMethod("4A", 15, 16) == "46"
     assert functions.ConvertUsingSubstitutionMethod("524635153456", 10, 16) == "7A26B12430"
+
+
+def TestConvertUsingRapidConversions():
+    assert functions.ConvertUsingRapidConversions("1010101101010", 2, 8) == "12552"
+    assert functions.ConvertUsingRapidConversions("101010110101010101011010", 2, 16) == "AB555A"
+    assert functions.ConvertUsingRapidConversions("101010110", 2, 2) == "101010110"
+    assert functions.ConvertUsingRapidConversions("32132131212", 4, 2) == "1110011110011101100110"
+    assert functions.ConvertUsingRapidConversions("BAF3EC43", 16, 2) == "10111010111100111110110001000011"
 
 
 def TestBaseXToBase10():

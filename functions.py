@@ -181,8 +181,11 @@ def BaseXToBase10(x: str, sourceBase: int) -> str:
 
 
 def Base10ToBaseX(x: str, sourceBase: int) -> str:
-    x = int(x)
+    # Edge case
+    if x == "0":
+        return "0"
 
+    x = int(x)
     ans = ""
     while x != 0:
         ans = str(DecimalToHexa(x % sourceBase)) + ans
@@ -209,6 +212,57 @@ def ManageConvertUsing10AsIntermediaryBase() -> str:
     ValidateNumber(x, sourceBase)
 
     ans = ConvertUsing10AsIntermediaryBase(x, sourceBase, destinationBase)
+    return ans
+
+
+def ConvertUsingRapidConversions(x: str, sourceBase: int, destinationBase: int) -> str:
+    ans = ""
+    di = {2: 1, 4: 2, 8: 3, 16: 4}
+
+    if sourceBase == 2:
+        gap = di[destinationBase]
+
+        x = x[::-1]  # Reversing the string
+        li = [x[i : i + gap] for i in range(0, len(x), gap)]  # Slicing the string
+
+        li.reverse()  # Reversing the list
+
+        # Reversing every element from the list
+        for i in range(len(li)):
+            li[i] = li[i][::-1]
+
+        # Computing the answer
+        for i in range(len(li)):
+            ans += ConvertUsing10AsIntermediaryBase(li[i], sourceBase, destinationBase)
+    else:  # destinationBase = 2
+        gap = di[sourceBase]
+
+        for i in range(len(x)):
+            temp = ConvertUsing10AsIntermediaryBase(x[i], sourceBase, destinationBase)
+
+            # Adding the leading zeros
+            while len(temp) < gap:
+                temp = "0" + temp
+
+            ans += temp
+
+    ans = ans.lstrip("0")  # Removing the leading zeros
+    return ans
+
+
+def ManageConvertUsingRapidConversions() -> str:
+    sourceBase = ui.InputSourceBase()
+    destinationBase = ui.InputDestinationBase()
+    x = ui.InputNumber()
+
+    ValidateBase(sourceBase)
+    ValidateBase(destinationBase)
+    sourceBase = int(sourceBase)
+    destinationBase = int(destinationBase)
+    ValidateNumber(x, sourceBase)
+    ValidateBasesForRapidConversions(sourceBase, destinationBase)
+
+    ans = ConvertUsingRapidConversions(x, sourceBase, destinationBase)
     return ans
 
 
@@ -246,11 +300,7 @@ def ValidateNumber(number: str, base: int):
         raise Exception(ui.HandleErrors(1))
 
     for i in range(len(number)):
-        if (number[i] != '0' and number[i] != '1' and number[i] != '2' and number[i] != '3' and number[i] != '4' and
-            number[i] != '5' and number[i] != '6' and number[i] != '7' and number[i] != '8' and number[i] != '9' and
-            number[i] != 'A' and number[i] != 'B' and number[i] != 'C' and number[i] != 'D' and number[i] != 'E' and
-            number[i] != 'F' and number[i] != 'a' and number[i] != 'b' and number[i] != 'c' and number[i] != 'd' and
-            number[i] != 'e' and number[i] != 'f') == True:
+        if IsHexadecimal(number[i]) == False:
             raise Exception(ui.HandleErrors(1))
 
         if HexaToDecimal(number[i]) >= base:
@@ -271,6 +321,15 @@ def ValidateBasesForSuccessiveDivisions(sourceBase: int, destinationBase: int):
 def ValidateBasesForSubstitutionMethod(sourceBase: int, destinationBase: int):
     if sourceBase > destinationBase:
         raise Exception(ui.HandleErrors(6))
+
+
+def ValidateBasesForRapidConversions(sourceBase: int, destinationBase: int):
+    if sourceBase != 2 and sourceBase != 4 and sourceBase != 8 and sourceBase != 16:
+        raise Exception(ui.HandleErrors(7))
+    if destinationBase != 2 and destinationBase != 4 and destinationBase != 8 and destinationBase != 16:
+        raise Exception(ui.HandleErrors(7))
+    if sourceBase != 2 and destinationBase != 2:
+        raise Exception(ui.HandleErrors(7))
 
 
 def ValidateOperands(x: str, y: str):

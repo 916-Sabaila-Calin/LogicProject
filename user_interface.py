@@ -31,7 +31,7 @@ def HandleOptions(option: str):
         elif option == "6":
             OutputString("The result is: " + functions.ManageConvertUsing10AsIntermediaryBase())
         elif option == "7":
-            pass
+            OutputString("The result is: " + functions.ManageConvertUsingRapidConversions())
         elif option == "8":
             OutputString("The result is: " + functions.ManageConvertUsingSubstitutionMethod())
         elif option == "exit":
@@ -59,7 +59,7 @@ def HandleErrors(errorCode: int) -> str:
     elif errorCode == 6:
         string += "The source base should be less or equal than the destination base!"
     elif errorCode == 7:
-        pass
+        string += "Cannot do rapid conversions using the provided bases!"
 
     return string
 
