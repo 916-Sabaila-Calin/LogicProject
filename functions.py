@@ -158,7 +158,7 @@ def SuccessiveDivisions():
 def ManageSuccessiveDivisions() -> str:
     sourceBase = ui.InputSourceBase()
     destinationBase = ui.InputDestinationBase()
-    x = ui.InputFirstNumber()
+    x = ui.InputNumber()
 
     ValidateBase(sourceBase)
     ValidateBase(destinationBase)
@@ -171,13 +171,65 @@ def ManageSuccessiveDivisions() -> str:
     return ans
 
 
-def ToBase10(x: str, sourceBase: int) -> str:
+def BaseXToBase10(x: str, sourceBase: int) -> str:
     ans, pow = 0, 1
     for i in range(len(x) - 1, -1, -1):
         ans = ans + pow * HexaToDecimal(x[i])
         pow *= sourceBase
 
     return str(ans)
+
+
+def Base10ToBaseX(x: str, sourceBase: int) -> str:
+    x = int(x)
+
+    ans = ""
+    while x != 0:
+        ans = str(DecimalToHexa(x % sourceBase)) + ans
+        x //= sourceBase
+
+    return ans
+
+
+def ConvertUsing10AsIntermediaryBase(x: str, sourceBase: int, destinationBase: int) -> str:
+    ans = BaseXToBase10(x, sourceBase)
+    ans = Base10ToBaseX(ans, destinationBase)
+    return ans
+
+
+def ManageConvertUsing10AsIntermediaryBase() -> str:
+    sourceBase = ui.InputSourceBase()
+    destinationBase = ui.InputDestinationBase()
+    x = ui.InputNumber()
+
+    ValidateBase(sourceBase)
+    ValidateBase(destinationBase)
+    sourceBase = int(sourceBase)
+    destinationBase = int(destinationBase)
+    ValidateNumber(x, sourceBase)
+
+    ans = ConvertUsing10AsIntermediaryBase(x, sourceBase, destinationBase)
+    return ans
+
+
+def ConvertUsingSubstitutionMethod(x: str, sourceBase: int, destinationBase: int) -> str:
+    pass
+
+
+def ManageConvertUsingSubstitutionMethod() -> str:
+    sourceBase = ui.InputSourceBase()
+    destinationBase = ui.InputDestinationBase()
+    x = ui.InputNumber()
+
+    ValidateBase(sourceBase)
+    ValidateBase(destinationBase)
+    sourceBase = int(sourceBase)
+    destinationBase = int(destinationBase)
+    ValidateNumber(x, sourceBase)
+    ValidateBasesForSubstitutionMethod(sourceBase, destinationBase)
+
+    ans = ConvertUsingSubstitutionMethod(x, sourceBase, destinationBase)
+    return ans
 
 
 def ValidateNumber(number: str, base: int):
@@ -205,6 +257,11 @@ def ValidateBase(base: str):
 def ValidateBasesForSuccessiveDivisions(sourceBase: int, destinationBase: int):
     if sourceBase < destinationBase:
         raise Exception(ui.HandleErrors(5))
+
+
+def ValidateBasesForSubstitutionMethod(sourceBase: int, destinationBase: int):
+    if sourceBase > destinationBase:
+        raise Exception(ui.HandleErrors(6))
 
 
 def ValidateOperands(x: str, y: str):

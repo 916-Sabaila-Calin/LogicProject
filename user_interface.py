@@ -10,7 +10,9 @@ def PrintMenu():
     OutputString("Press 3 to multiply two numbers.")
     OutputString("Press 4 to divide two numbers.")
     OutputString("Press 5 to convert numbers using successive divisions.")
+    OutputString("Press 6 to convert numbers using 10 as an intermediary base.")
     OutputString("Press 7 to convert numbers using rapid conversions.")
+    OutputString("Press 8 to convert numbers using the substitution method.")
     OutputString("Type \"exit\" to close the application.")
 
 
@@ -27,7 +29,7 @@ def HandleOptions(option: str):
         elif option == "5":
             pass
         elif option == "6":
-            pass
+            OutputString("The result is: " + functions.ManageConvertUsing10AsIntermediaryBase())
         elif option == "7":
             pass
         elif option == "exit":
@@ -53,7 +55,7 @@ def HandleErrors(errorCode: int) -> str:
     elif errorCode == 5:
         string += "The source base should be greater or equal than the destination base!"
     elif errorCode == 6:
-        pass
+        string += "The source base should be less or equal than the destination base!"
     elif errorCode == 7:
         pass
 
@@ -95,6 +97,14 @@ def InputFirstNumber() -> str:
 def InputSecondNumber() -> str:
     OutputString("")
     OutputString("Enter the second number.")
+
+    number = InputString()
+    return number
+
+
+def InputNumber() -> str:
+    OutputString("")
+    OutputString("Enter the number.")
 
     number = InputString()
     return number
