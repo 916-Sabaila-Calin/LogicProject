@@ -218,7 +218,7 @@ def ConvertUsingSubstitutionMethod(x: str, sourceBase: int, destinationBase: int
 
     for i in range(len(x) - 1, - 1, -1):
         temp = MultiplyNumbers(x[i], pow, destinationBase)
-        pow = MultiplyNumbers(pow, str(sourceBase), destinationBase)
+        pow = MultiplyNumbers(pow, DecimalToHexa(sourceBase), destinationBase)
 
         ans = AddNumbers(ans, temp, destinationBase)
 

@@ -50,7 +50,7 @@ def TestConvertUsingSubstitutionMethod():
     assert functions.ConvertUsingSubstitutionMethod("41234124132", 5, 10) == "42098667"
     assert functions.ConvertUsingSubstitutionMethod("76254313232", 8, 12) == "1755BA378A"
     assert functions.ConvertUsingSubstitutionMethod("4A", 15, 16) == "46"
-    #assert functions.ConvertUsingSubstitutionMethod("524635153456", 10, 16) == "7A26B12430"
+    assert functions.ConvertUsingSubstitutionMethod("524635153456", 10, 16) == "7A26B12430"
 
 
 def TestBaseXToBase10():
