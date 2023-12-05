@@ -51,7 +51,7 @@ def HandleErrors(errorCode: int) -> str:
     elif errorCode == 3:
         string += "The digits of the number cannot be higher or equal to the base!"
     elif errorCode == 4:
-        string += "At least one of the operands should have one digit!"
+        string += "At least one of the operands should have one digit in the hexadecimal format!"
     elif errorCode == 5:
         string += "The source base should be greater or equal than the destination base!"
     elif errorCode == 6:

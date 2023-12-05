@@ -110,8 +110,8 @@ def ManageSubtractNumbers() -> str:
 
 
 def MultiplyNumbers(x: str, y: str, base: int) -> str:
-    # Making sure that y is the operand with one digit
-    if len(y) > 1:
+    # Making sure that y is the operand with one digit in hexadecimal format
+    if IsHexadecimal(y) == False:
         x, y = y, x  # Swap
 
     # Returning 0 when multiplying by 0
@@ -164,8 +164,8 @@ def ManageSuccessiveDivisions() -> str:
     ValidateBase(destinationBase)
     sourceBase = int(sourceBase)
     destinationBase = int(destinationBase)
-    ValidateBasesForSuccessiveDivisions(sourceBase, destinationBase)
     ValidateNumber(x, sourceBase)
+    ValidateBasesForSuccessiveDivisions(sourceBase, destinationBase)
 
     ans = ""
     return ans
@@ -213,7 +213,16 @@ def ManageConvertUsing10AsIntermediaryBase() -> str:
 
 
 def ConvertUsingSubstitutionMethod(x: str, sourceBase: int, destinationBase: int) -> str:
-    pass
+    ans = ""
+    pow = "1"
+
+    for i in range(len(x) - 1, - 1, -1):
+        temp = MultiplyNumbers(x[i], pow, destinationBase)
+        pow = MultiplyNumbers(pow, str(sourceBase), destinationBase)
+
+        ans = AddNumbers(ans, temp, destinationBase)
+
+    return ans
 
 
 def ManageConvertUsingSubstitutionMethod() -> str:
@@ -265,24 +274,25 @@ def ValidateBasesForSubstitutionMethod(sourceBase: int, destinationBase: int):
 
 
 def ValidateOperands(x: str, y: str):
-    if len(x) > 1 and len(y) > 1:
+    if IsHexadecimal(x) == False and IsHexadecimal(y) == False:
         raise Exception(ui.HandleErrors(4))
 
 
-def HexaToDecimal(string: str) -> int:
-    if '0' <= string and string <= '9':
-        return int(string)
-    elif string == 'A' or string == 'a':
+def HexaToDecimal(s: str) -> int:
+    if (s == "0" or s == "1" or s == "2" or s == "3" or s == "4" or
+        s == "5" or s == "6" or s == "7" or s == "8" or s == "9"):
+        return int(s)
+    elif s == 'A' or s == 'a':
         return 10
-    elif string == 'B' or string == 'b':
+    elif s == 'B' or s == 'b':
         return 11
-    elif string == 'C' or string == 'c':
+    elif s == 'C' or s == 'c':
         return 12
-    elif string == 'D' or string == 'd':
+    elif s == 'D' or s == 'd':
         return 13
-    elif string == 'E' or string == 'e':
+    elif s == 'E' or s == 'e':
         return 14
-    elif string == 'F' or string == 'f':
+    elif s == 'F' or s == 'f':
         return 15
 
 
@@ -301,3 +311,12 @@ def DecimalToHexa(num: int) -> str:
         return 'E'
     elif num == 15:
         return 'F'
+
+
+def IsHexadecimal(s: str) -> bool:
+    return (s == "0" or s == "1" or s == "2" or s == "3" or
+            s == "4" or s == "5" or s == "6" or s == "7" or
+            s == "8" or s == "9" or s == "A" or s == 'a' or
+            s == "B" or s == 'b' or s == "C" or s == 'c' or
+            s == "D" or s == 'd' or s == "E" or s == 'e' or
+            s == "F" or s == 'f')
