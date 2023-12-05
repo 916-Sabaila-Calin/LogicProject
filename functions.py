@@ -279,8 +279,8 @@ def ValidateOperands(x: str, y: str):
 
 
 def HexaToDecimal(s: str) -> int:
-    if (s == "0" or s == "1" or s == "2" or s == "3" or s == "4" or
-        s == "5" or s == "6" or s == "7" or s == "8" or s == "9"):
+    if (s == '0' or s == '1' or s == '2' or s == '3' or s == '4' or
+        s == '5' or s == '6' or s == '7' or s == '8' or s == '9'):
         return int(s)
     elif s == 'A' or s == 'a':
         return 10
@@ -314,9 +314,9 @@ def DecimalToHexa(num: int) -> str:
 
 
 def IsHexadecimal(s: str) -> bool:
-    return (s == "0" or s == "1" or s == "2" or s == "3" or
-            s == "4" or s == "5" or s == "6" or s == "7" or
-            s == "8" or s == "9" or s == "A" or s == 'a' or
-            s == "B" or s == 'b' or s == "C" or s == 'c' or
-            s == "D" or s == 'd' or s == "E" or s == 'e' or
-            s == "F" or s == 'f')
+    return (s == '0' or s == '1' or s == '2' or s == '3' or
+            s == '4' or s == '5' or s == '6' or s == '7' or
+            s == '8' or s == '9' or s == 'A' or s == 'a' or
+            s == 'B' or s == 'b' or s == 'C' or s == 'c' or
+            s == 'D' or s == 'd' or s == 'E' or s == 'e' or
+            s == 'F' or s == 'f')

@@ -32,6 +32,8 @@ def HandleOptions(option: str):
             OutputString("The result is: " + functions.ManageConvertUsing10AsIntermediaryBase())
         elif option == "7":
             pass
+        elif option == "8":
+            OutputString("The result is: " + functions.ManageConvertUsingSubstitutionMethod())
         elif option == "exit":
             exit()
         else:
