@@ -145,17 +145,52 @@ def ManageMultiplyNumbers() -> str:
     base = int(base)
     ValidateNumber(x, base)
     ValidateNumber(y, base)
-    ValidateOperands(x, y)
+    ValidateOperandsForMultiplication(x, y)
 
     ans = MultiplyNumbers(x, y, base)
     return ans
 
 
-def SuccessiveDivisions():
-    pass
+def DivideNumbers(x: str, y: str, base: int) -> (str, str):
+    cpy = x
+
+    x = BaseXToBase10(x, base)
+    x = int(x)
+    x //= HexaToDecimal(y)
+
+    quotient = Base10ToBaseX(str(x), base)
+    remainder = SubtractNumbers(cpy, MultiplyNumbers(quotient, y, base), base)
+
+    return quotient, remainder
 
 
-def ManageSuccessiveDivisions() -> str:
+def ManageDivideNumbers() -> (str, str):
+    base = ui.InputBase()
+    x = ui.InputFirstNumber()
+    y = ui.InputSecondNumber()
+
+    ValidateBase(base)
+    base = int(base)
+    ValidateNumber(x, base)
+    ValidateNumber(y, base)
+    ValidateOperandsForDivision(y)
+
+    quotient, remainder = DivideNumbers(x, y, base)
+    return quotient, remainder
+
+
+def ConvertUsingSuccessiveDivisions(x: str, sourceBase: int, destinationBase: int) -> str:
+    ans = ""
+
+    while x != "0":
+        remainder, quotient = DivideNumbers(x, DecimalToHexa(destinationBase), sourceBase)
+        x = remainder
+        ans = quotient + ans
+
+    return ans
+
+
+def ManageConvertUsingSuccessiveDivisions() -> str:
     sourceBase = ui.InputSourceBase()
     destinationBase = ui.InputDestinationBase()
     x = ui.InputNumber()
@@ -167,7 +202,7 @@ def ManageSuccessiveDivisions() -> str:
     ValidateNumber(x, sourceBase)
     ValidateBasesForSuccessiveDivisions(sourceBase, destinationBase)
 
-    ans = ""
+    ans = ConvertUsingSuccessiveDivisions(x, sourceBase, destinationBase)
     return ans
 
 
@@ -332,9 +367,16 @@ def ValidateBasesForRapidConversions(sourceBase: int, destinationBase: int):
         raise Exception(ui.HandleErrors(7))
 
 
-def ValidateOperands(x: str, y: str):
+def ValidateOperandsForMultiplication(x: str, y: str):
     if IsHexadecimal(x) == False and IsHexadecimal(y) == False:
         raise Exception(ui.HandleErrors(4))
+
+
+def ValidateOperandsForDivision(y: str):
+    if IsHexadecimal(y) == False:
+        raise Exception(ui.HandleErrors(8))
+    if y == "0":
+        raise Exception(ui.HandleErrors(9))
 
 
 def HexaToDecimal(s: str) -> int:

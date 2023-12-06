@@ -5,10 +5,12 @@ def RunAllTests():
     TestAddNumbers()
     TestMultiplyNumbers()
     TestSubtractNumbers()
+    TestDivideNumbers()
 
     TestConvertUsing10AsIntermediaryBase()
     TestConvertUsingSubstitutionMethod()
     TestConvertUsingRapidConversions()
+    TestConvertUsingSuccessiveDivisions()
 
     TestBaseXToBase10()
     TestBase10ToBaseX()
@@ -38,6 +40,14 @@ def TestSubtractNumbers():
     assert functions.SubtractNumbers("10", "10", 10) == "0"
 
 
+def TestDivideNumbers():
+    assert functions.DivideNumbers("4302", "5", 6) == ("522", "4")
+    assert functions.DivideNumbers("7", "8", 9) == ("0", "7")
+    assert functions.DivideNumbers("32141AAF432E3DC2EF12", "E", 16) == ("393B8C3603A28FBA35C", "A")
+    assert functions.DivideNumbers("6", "6", 9) == ("1", "0")
+    assert functions.DivideNumbers("5167542662", "1", 8) == ("5167542662", "0")
+
+
 def TestConvertUsing10AsIntermediaryBase():
     assert functions.ConvertUsing10AsIntermediaryBase("25341321", 6, 12) == "337841"
     assert functions.ConvertUsing10AsIntermediaryBase("10101010101", 2, 2) == "10101010101"
@@ -60,6 +70,14 @@ def TestConvertUsingRapidConversions():
     assert functions.ConvertUsingRapidConversions("101010110", 2, 2) == "101010110"
     assert functions.ConvertUsingRapidConversions("32132131212", 4, 2) == "1110011110011101100110"
     assert functions.ConvertUsingRapidConversions("BAF3EC43", 16, 2) == "10111010111100111110110001000011"
+
+
+def TestConvertUsingSuccessiveDivisions():
+    assert functions.ConvertUsingSuccessiveDivisions("2B1D", 16, 2) == "10101100011101"
+    assert functions.ConvertUsingSuccessiveDivisions("42098667", 10, 5) == "41234124132"
+    assert functions.ConvertUsingSuccessiveDivisions("1755BA378A", 12, 8) == "76254313232"
+    assert functions.ConvertUsingSuccessiveDivisions("46", 16, 15) == "4A"
+    assert functions.ConvertUsingSuccessiveDivisions("7A26B12430", 16, 10) == "524635153456"
 
 
 def TestBaseXToBase10():

@@ -25,9 +25,10 @@ def HandleOptions(option: str):
         elif option == "3":
             OutputString("The result is: " + functions.ManageMultiplyNumbers())
         elif option == "4":
-            pass
+            ans = functions.ManageDivideNumbers()
+            OutputString("The quotient is: " + ans[0] + " and the remainder is: " + ans[1])
         elif option == "5":
-            pass
+            OutputString("The result is: " + functions.ManageConvertUsingSuccessiveDivisions())
         elif option == "6":
             OutputString("The result is: " + functions.ManageConvertUsing10AsIntermediaryBase())
         elif option == "7":
@@ -60,6 +61,10 @@ def HandleErrors(errorCode: int) -> str:
         string += "The source base should be less or equal than the destination base!"
     elif errorCode == 7:
         string += "Cannot do rapid conversions using the provided bases!"
+    elif errorCode == 8:
+        string += "The divisor should have one digit!"
+    elif errorCode == 9:
+        string += "Cannot divide by 0!"
 
     return string
 

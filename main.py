@@ -1,4 +1,3 @@
-import functions as functions
 import user_interface as ui
 import tests as tests
 
