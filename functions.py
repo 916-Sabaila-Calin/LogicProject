@@ -477,7 +477,7 @@ def ValidateBase(base: str):
     This function validates a given base
     :param base: a string representing a base
     :return: -, if no exceptions are raised
-    :raise: - an exception with the string message "invalid literal for int() with base 10: 'user_input'", if the base
+    :raise: - an exception with the string message "invalid literal for int() with base 10: <user_input>", if the base
               cannot be converted to an integer
             - an exception with the string message "Error: The base is not between 2 and 16!", if the base is not
               between 2 and 16
@@ -555,7 +555,7 @@ def ValidateOperandForDivision(y: str):
     :return: -, if no exceptions are raised
     :raise: - an exception with the string message "Error: The divisor should have one digit!", if the number is not
               composed of a single hexadecimal digit
-            - an exception with the string message :Error: Cannot divide by 0!", if the number is "0"
+            - an exception with the string message "Error: Cannot divide by 0!", if the number is "0"
     """
 
     if IsHexadecimal(y) == False:

@@ -2,6 +2,11 @@ import functions as functions
 
 
 def RunAllTests():
+    """
+    This function tests all functionalities of the program
+    :return: -
+    """
+
     TestAddNumbers()
     TestMultiplyNumbers()
     TestSubtractNumbers()
@@ -17,6 +22,11 @@ def RunAllTests():
 
 
 def TestAddNumbers():
+    """
+    This function tests the AddNumbers function
+    :return: -
+    """
+
     assert functions.AddNumbers("4234", "525532", 7) == "533066"
     assert functions.AddNumbers("4323FFED2", "42AD", 16) == "43240417F"
     assert functions.AddNumbers("1543264745", "41264527846", 9) == "42817803702"
@@ -25,6 +35,11 @@ def TestAddNumbers():
 
 
 def TestMultiplyNumbers():
+    """
+    This function tests the MultiplyNumbers function
+    :return: -
+    """
+
     assert functions.MultiplyNumbers("421352", "6", 7) == "3462135"
     assert functions.MultiplyNumbers("31AFF", "A", 16) == "1F0DF6"
     assert functions.MultiplyNumbers("B", "31FEE31AD2", 16) == "225F3C22706"
@@ -33,6 +48,11 @@ def TestMultiplyNumbers():
 
 
 def TestSubtractNumbers():
+    """
+    This function tests the SubtractNumbers function
+    :return: -
+    """
+
     assert functions.SubtractNumbers("20", "10", 10) == "10"
     assert functions.SubtractNumbers("54324", "54214", 7) == "110"
     assert functions.SubtractNumbers("32ABB89DF52AFF", "F45AD34B", 16) == "32ABB7A99A57B4"
@@ -41,6 +61,11 @@ def TestSubtractNumbers():
 
 
 def TestDivideNumbers():
+    """
+    This function tests the DivideNumbers function
+    :return: -
+    """
+
     assert functions.DivideNumbers("4302", "5", 6) == ("522", "4")
     assert functions.DivideNumbers("7", "8", 9) == ("0", "7")
     assert functions.DivideNumbers("32141AAF432E3DC2EF12", "E", 16) == ("393B8C3603A28FBA35C", "A")
@@ -49,6 +74,11 @@ def TestDivideNumbers():
 
 
 def TestConvertUsing10AsIntermediaryBase():
+    """
+    This function tests the ConvertUsing10AsIntermediaryBase function
+    :return: -
+    """
+
     assert functions.ConvertUsing10AsIntermediaryBase("25341321", 6, 12) == "337841"
     assert functions.ConvertUsing10AsIntermediaryBase("10101010101", 2, 2) == "10101010101"
     assert functions.ConvertUsing10AsIntermediaryBase("101010101101110101", 2, 16) == "2AB75"
@@ -57,6 +87,11 @@ def TestConvertUsing10AsIntermediaryBase():
 
 
 def TestConvertUsingSubstitutionMethod():
+    """
+    This function tests the ConvertUsingSubstitutionMethod function
+    :return: -
+    """
+
     assert functions.ConvertUsingSubstitutionMethod("10101100011101", 2, 16) == "2B1D"
     assert functions.ConvertUsingSubstitutionMethod("41234124132", 5, 10) == "42098667"
     assert functions.ConvertUsingSubstitutionMethod("76254313232", 8, 12) == "1755BA378A"
@@ -65,6 +100,11 @@ def TestConvertUsingSubstitutionMethod():
 
 
 def TestConvertUsingRapidConversions():
+    """
+    This function tests the ConvertUsingRapidConversions function
+    :return: -
+    """
+
     assert functions.ConvertUsingRapidConversions("1010101101010", 2, 8) == "12552"
     assert functions.ConvertUsingRapidConversions("101010110101010101011010", 2, 16) == "AB555A"
     assert functions.ConvertUsingRapidConversions("101010110", 2, 2) == "101010110"
@@ -73,6 +113,11 @@ def TestConvertUsingRapidConversions():
 
 
 def TestConvertUsingSuccessiveDivisions():
+    """
+    This function tests the ConvertUsingSuccessiveDivisions function
+    :return: -
+    """
+
     assert functions.ConvertUsingSuccessiveDivisions("2B1D", 16, 2) == "10101100011101"
     assert functions.ConvertUsingSuccessiveDivisions("42098667", 10, 5) == "41234124132"
     assert functions.ConvertUsingSuccessiveDivisions("1755BA378A", 12, 8) == "76254313232"
@@ -81,6 +126,11 @@ def TestConvertUsingSuccessiveDivisions():
 
 
 def TestBaseXToBase10():
+    """
+    This function tests the BaseXToBase10 function
+    :return: -
+    """
+
     assert functions.BaseXToBase10("234322", 5) == "8712"
     assert functions.BaseXToBase10("10101011101111101101001", 2) == "5627753"
     assert functions.BaseXToBase10("61456236", 8) == "12999838"
@@ -89,6 +139,11 @@ def TestBaseXToBase10():
 
 
 def TestBase10ToBaseX():
+    """
+    This function tests the Base10ToBaseX function
+    :return: -
+    """
+
     assert functions.Base10ToBaseX("41351", 16) == "A187"
     assert functions.Base10ToBaseX("26453", 2) == "110011101010101"
     assert functions.Base10ToBaseX("143252353", 10) == "143252353"

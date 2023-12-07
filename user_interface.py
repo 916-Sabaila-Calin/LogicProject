@@ -4,6 +4,11 @@ import functions as functions
 
 
 def PrintMenu():
+    """
+    This function prints the menu
+    :return: -
+    """
+
     OutputString("")
     OutputString("Press 1 to add two numbers.")
     OutputString("Press 2 to subtract two numbers.")
@@ -17,6 +22,13 @@ def PrintMenu():
 
 
 def HandleOptions(option: str):
+    """
+    This function handles the options of the program
+    :param option: a string representing the option
+    :raise: an exception with the string message "Error: The input is invalid!", if
+            the option is invalid
+    """
+
     try:
         if option == "1":
             OutputString("The result is: " + functions.ManageAddNumbers())
@@ -45,6 +57,12 @@ def HandleOptions(option: str):
 
 
 def HandleErrors(errorCode: int) -> str:
+    """
+    This function handles the errors of the program
+    :param errorCode: an integer representing the error code
+    :return: a string of the form "Error: + custom message"
+    """
+
     string = "Error: "
 
     if errorCode == 1:
@@ -70,6 +88,11 @@ def HandleErrors(errorCode: int) -> str:
 
 
 def InputBase() -> str:
+    """
+    This function takes as input from the user a string and returns it
+    :return: a string representing the base of a number
+    """
+
     OutputString("")
     OutputString("Enter the base in which the operation will take place.")
 
@@ -78,6 +101,11 @@ def InputBase() -> str:
 
 
 def InputSourceBase() -> str:
+    """
+    This function takes as input from the user a string and returns it
+    :return: a string representing the base of a number
+    """
+
     OutputString("")
     OutputString("Enter the source base.")
 
@@ -86,6 +114,11 @@ def InputSourceBase() -> str:
 
 
 def InputDestinationBase() -> str:
+    """
+    This function takes as input from the user a string and returns it
+    :return: a string representing the base of a number
+    """
+
     OutputString("")
     OutputString("Enter the destination base.")
 
@@ -94,6 +127,11 @@ def InputDestinationBase() -> str:
 
 
 def InputFirstNumber() -> str:
+    """
+    This function takes as input from the user a string and returns it
+    :return: a string representing a number
+    """
+
     OutputString("")
     OutputString("Enter the first number.")
 
@@ -102,6 +140,11 @@ def InputFirstNumber() -> str:
 
 
 def InputSecondNumber() -> str:
+    """
+    This function takes as input from the user a string and returns it
+    :return: a string representing a number
+    """
+
     OutputString("")
     OutputString("Enter the second number.")
 
@@ -110,6 +153,11 @@ def InputSecondNumber() -> str:
 
 
 def InputNumber() -> str:
+    """
+    This function takes as input from the user a string and returns it
+    :return: a string representing a number
+    """
+
     OutputString("")
     OutputString("Enter the number.")
 
@@ -118,9 +166,20 @@ def InputNumber() -> str:
 
 
 def InputString() -> str:
+    """
+    This function takes as input from the user a string and returns it
+    :return: a string
+    """
+
     string = input()
     return string
 
 
 def OutputString(string: str):
+    """
+    This function outputs a string
+    :param string: a string
+    :return: -
+    """
+
     print(string)
