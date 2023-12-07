@@ -3,6 +3,10 @@ import tests as tests
 
 
 def main():
+    """
+    This is the main function of the program
+    :return: -
+    """
     ui.OutputString("Săbăilă Călin-Ioan, Group: 916")
 
     tests.RunAllTests()

@@ -52,7 +52,7 @@ def HandleErrors(errorCode: int) -> str:
     elif errorCode == 2:
         string += "The base is not between 2 and 16!"
     elif errorCode == 3:
-        string += "The digits of the number cannot be higher or equal to the base!"
+        string += "The digits of the number cannot be greater or equal than the base!"
     elif errorCode == 4:
         string += "At least one of the operands should have one digit in the hexadecimal format!"
     elif errorCode == 5:

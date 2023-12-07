@@ -2,6 +2,14 @@ import user_interface as ui
 
 
 def AddNumbers(x: str, y: str, base: int) -> str:
+    """
+    This function adds two numbers in a specified base
+    :param x: a string representing the first operand of the addition
+    :param y: a string representing the second operand of the addition
+    :param base: an integer representing the base in which the addition will take place
+    :return: a string representing the result of the addition of the two numbers
+    """
+
     # The two numbers are represented using two arrays
     num1, num2 = [], []
     for i in range(len(x) - 1, -1, -1):
@@ -20,9 +28,6 @@ def AddNumbers(x: str, y: str, base: int) -> str:
             temp += HexaToDecimal(num2[i])
         temp += carry
 
-        if carry > 0:
-            carry = 0
-
         carry = temp // base
         ans += DecimalToHexa(temp % base)
 
@@ -34,6 +39,11 @@ def AddNumbers(x: str, y: str, base: int) -> str:
 
 
 def ManageAddNumbers() -> str:
+    """
+    This function takes in and validates all parameters for the AddNumbers function
+    :return: a string representing the result of the addition of the two numbers, if no exceptions are raised
+    """
+
     base = ui.InputBase()
     x = ui.InputFirstNumber()
     y = ui.InputSecondNumber()
@@ -48,6 +58,15 @@ def ManageAddNumbers() -> str:
 
 
 def SubtractNumbers(x: str, y: str, base: int) -> str:
+    """
+    This function subtracts two numbers in a specified base
+    :param x: a string representing the first operand of the subtraction
+    :param y: a string representing the second operand of the subtraction
+    :param base: an integer representing the base in which the subtraction will take place
+    :return: a string representing the result of the subtraction of the two numbers
+    """
+
+    # Edge case
     if x == y:
         return '0'
 
@@ -96,6 +115,11 @@ def SubtractNumbers(x: str, y: str, base: int) -> str:
 
 
 def ManageSubtractNumbers() -> str:
+    """
+    This function takes in and validates all parameters for the SubtractNumbers function
+    :return: a string representing the result of the subtraction of the two numbers, if no exceptions are raised
+    """
+
     base = ui.InputBase()
     x = ui.InputFirstNumber()
     y = ui.InputSecondNumber()
@@ -110,6 +134,15 @@ def ManageSubtractNumbers() -> str:
 
 
 def MultiplyNumbers(x: str, y: str, base: int) -> str:
+    """
+    This function multiplies two numbers in a specified base
+    :param x: a string representing the first operand of the multiplication
+    :param y: a string representing the second operand of the multiplication, which
+             must be a digit in the hexadecimal format
+    :param base: an integer representing the base in which the multiplication will take place
+    :return: a string representing the result of the multiplication of the two numbers
+    """
+
     # Making sure that y is the operand with one digit in hexadecimal format
     if IsHexadecimal(y) == False:
         x, y = y, x  # Swap
@@ -123,9 +156,6 @@ def MultiplyNumbers(x: str, y: str, base: int) -> str:
     for i in range(len(x) - 1, -1, -1):
         temp = HexaToDecimal(x[i]) * HexaToDecimal(y) + carry
 
-        if carry > 0:
-            carry = 0
-
         carry = temp // base
         ans += DecimalToHexa(temp % base)
 
@@ -137,6 +167,11 @@ def MultiplyNumbers(x: str, y: str, base: int) -> str:
 
 
 def ManageMultiplyNumbers() -> str:
+    """
+    This function takes in and validates all parameters for the MultiplyNumbers function
+    :return: a string representing the result of the multiplication of the two numbers, if no exceptions are raised
+    """
+
     base = ui.InputBase()
     x = ui.InputFirstNumber()
     y = ui.InputSecondNumber()
@@ -152,6 +187,15 @@ def ManageMultiplyNumbers() -> str:
 
 
 def DivideNumbers(x: str, y: str, base: int) -> (str, str):
+    """
+    This function divides two numbers in a specified base
+    :param x: a string representing the first operand of the division
+    :param y: a string representing the second operand of the division, which
+             must be a digit in the hexadecimal format
+    :param base: an integer representing the base in which the division will take place
+    :return: a tuple of strings representing the quotient and the remainder
+    """
+
     cpy = x
 
     x = BaseXToBase10(x, base)
@@ -165,6 +209,11 @@ def DivideNumbers(x: str, y: str, base: int) -> (str, str):
 
 
 def ManageDivideNumbers() -> (str, str):
+    """
+    This function takes in and validates all parameters for the DivideNumbers function
+    :return: a tuple of strings representing the quotient and the remainder, if no exceptions are raised
+    """
+
     base = ui.InputBase()
     x = ui.InputFirstNumber()
     y = ui.InputSecondNumber()
@@ -173,13 +222,22 @@ def ManageDivideNumbers() -> (str, str):
     base = int(base)
     ValidateNumber(x, base)
     ValidateNumber(y, base)
-    ValidateOperandsForDivision(y)
+    ValidateOperandForDivision(y)
 
     quotient, remainder = DivideNumbers(x, y, base)
     return quotient, remainder
 
 
 def ConvertUsingSuccessiveDivisions(x: str, sourceBase: int, destinationBase: int) -> str:
+    """
+    This function converts a number from a source base to a destination base, using the successive divisions method
+    The source base should be greater of equal than the destination base
+    :param x: a string representing the number that will be converted
+    :param sourceBase: an integer representing the base of the number that will be converted
+    :param destinationBase: an integer representing the base in which the number will be converted
+    :return: a string representing the converted number
+    """
+
     ans = ""
 
     while x != "0":
@@ -191,6 +249,11 @@ def ConvertUsingSuccessiveDivisions(x: str, sourceBase: int, destinationBase: in
 
 
 def ManageConvertUsingSuccessiveDivisions() -> str:
+    """
+    This function takes in and validates all parameters for the ConvertUsingSuccessiveDivisions function
+    :return: a string representing the converted number, if no exceptions are raised
+    """
+
     sourceBase = ui.InputSourceBase()
     destinationBase = ui.InputDestinationBase()
     x = ui.InputNumber()
@@ -200,13 +263,20 @@ def ManageConvertUsingSuccessiveDivisions() -> str:
     sourceBase = int(sourceBase)
     destinationBase = int(destinationBase)
     ValidateNumber(x, sourceBase)
-    ValidateBasesForSuccessiveDivisions(sourceBase, destinationBase)
+    ValidateBasesForSuccessiveDivisionsMethod(sourceBase, destinationBase)
 
     ans = ConvertUsingSuccessiveDivisions(x, sourceBase, destinationBase)
     return ans
 
 
 def BaseXToBase10(x: str, sourceBase: int) -> str:
+    """
+    This function converts a number from a source base to base 10
+    :param x: a string representing the number that will be converted
+    :param sourceBase: an integer representing the base of the number that will be converted
+    :return: a string representing the converted number
+    """
+
     ans, pow = 0, 1
     for i in range(len(x) - 1, -1, -1):
         ans = ans + pow * HexaToDecimal(x[i])
@@ -215,7 +285,14 @@ def BaseXToBase10(x: str, sourceBase: int) -> str:
     return str(ans)
 
 
-def Base10ToBaseX(x: str, sourceBase: int) -> str:
+def Base10ToBaseX(x: str, destinationBase: int) -> str:
+    """
+    This function converts a number from base 10 to a destination base
+    :param x: a string representing the number that will be converted
+    :param destinationBase: an integer representing the base in which the number will be converted
+    :return: a string representing the converted number
+    """
+
     # Edge case
     if x == "0":
         return "0"
@@ -223,19 +300,32 @@ def Base10ToBaseX(x: str, sourceBase: int) -> str:
     x = int(x)
     ans = ""
     while x != 0:
-        ans = str(DecimalToHexa(x % sourceBase)) + ans
-        x //= sourceBase
+        ans = str(DecimalToHexa(x % destinationBase)) + ans
+        x //= destinationBase
 
     return ans
 
 
 def ConvertUsing10AsIntermediaryBase(x: str, sourceBase: int, destinationBase: int) -> str:
+    """
+    This function converts a number from a source base to a destination base, using 10 as an intermediary base
+    :param x: a string representing the number that will be converted
+    :param sourceBase: an integer representing the base of the number that will be converted
+    :param destinationBase: an integer representing the base in which the number will be converted
+    :return: a string representing the converted number
+    """
+
     ans = BaseXToBase10(x, sourceBase)
     ans = Base10ToBaseX(ans, destinationBase)
     return ans
 
 
 def ManageConvertUsing10AsIntermediaryBase() -> str:
+    """
+    This function takes in and validates all parameters for the ConvertUsing10AsIntermediaryBase function
+    :return: a string representing the converted number, if no exceptions are raise
+    """
+
     sourceBase = ui.InputSourceBase()
     destinationBase = ui.InputDestinationBase()
     x = ui.InputNumber()
@@ -251,6 +341,15 @@ def ManageConvertUsing10AsIntermediaryBase() -> str:
 
 
 def ConvertUsingRapidConversions(x: str, sourceBase: int, destinationBase: int) -> str:
+    """
+    This function converts a number from a source base to a destination base, using rapid conversions
+    At least one of the bases should be 2
+    :param x: a string representing the number that will be converted
+    :param sourceBase: an integer (2, 4, 8, or 16) representing the base of the number that will be converted
+    :param destinationBase: an integer (2, 4, 8, or 16) representing the base in which the number will be converted
+    :return: a string representing the converted number
+    """
+
     ans = ""
     di = {2: 1, 4: 2, 8: 3, 16: 4}
 
@@ -286,6 +385,11 @@ def ConvertUsingRapidConversions(x: str, sourceBase: int, destinationBase: int) 
 
 
 def ManageConvertUsingRapidConversions() -> str:
+    """
+    This function takes in and validates all parameters for the ConvertUsingRapidConversions function
+    :return: a string representing the converted number, if no exceptions are raised
+    """
+
     sourceBase = ui.InputSourceBase()
     destinationBase = ui.InputDestinationBase()
     x = ui.InputNumber()
@@ -295,13 +399,22 @@ def ManageConvertUsingRapidConversions() -> str:
     sourceBase = int(sourceBase)
     destinationBase = int(destinationBase)
     ValidateNumber(x, sourceBase)
-    ValidateBasesForRapidConversions(sourceBase, destinationBase)
+    ValidateBasesForRapidConversionsMethod(sourceBase, destinationBase)
 
     ans = ConvertUsingRapidConversions(x, sourceBase, destinationBase)
     return ans
 
 
 def ConvertUsingSubstitutionMethod(x: str, sourceBase: int, destinationBase: int) -> str:
+    """
+    This function converts a number from a source base to a destination base, using ths substitution method
+    The source base should be less or equal than the destination base
+    :param x: a string representing the number that will be converted
+    :param sourceBase: an integer representing the base of the number that will be converted
+    :param destinationBase: an integer representing the base in which the number will be converted
+    :return: a string representing the converted number
+    """
+
     ans = ""
     pow = "1"
 
@@ -315,6 +428,11 @@ def ConvertUsingSubstitutionMethod(x: str, sourceBase: int, destinationBase: int
 
 
 def ManageConvertUsingSubstitutionMethod() -> str:
+    """
+    This function takes in and validates all parameters for the ConvertUsingSubstitutionMethod function
+    :return: a string representing the converted number, if no exceptions are raised
+    """
+
     sourceBase = ui.InputSourceBase()
     destinationBase = ui.InputDestinationBase()
     x = ui.InputNumber()
@@ -331,6 +449,18 @@ def ManageConvertUsingSubstitutionMethod() -> str:
 
 
 def ValidateNumber(number: str, base: int):
+    """
+    This function validates a number of a given base
+    :param number: a string representing a number
+    :param base: an integer representing the base of the number
+    :return: -, if no exceptions are raised
+    :raise: - an exception with the string message "Error: The input is invalid!", if the number start with a 0
+            - an exception with the string message "Error: The input is invalid!", if the number
+              does not contain hexadecimal digits
+            - an exception with the string message "Error: The digits of the number cannot be greater or equal than
+              the base!", if the hexadecimal digits of the number are greater or equal than the base
+    """
+
     if number[0] == '0' and len(number) > 1:
         raise Exception(ui.HandleErrors(1))
 
@@ -343,22 +473,59 @@ def ValidateNumber(number: str, base: int):
 
 
 def ValidateBase(base: str):
+    """
+    This function validates a given base
+    :param base: a string representing a base
+    :return: -, if no exceptions are raised
+    :raise: - an exception with the string message "invalid literal for int() with base 10: 'user_input'", if the base
+              cannot be converted to an integer
+            - an exception with the string message "Error: The base is not between 2 and 16!", if the base is not
+              between 2 and 16
+    """
+
     base = int(base)
     if base < 2 or base > 17:
         raise Exception(ui.HandleErrors(2))
 
 
-def ValidateBasesForSuccessiveDivisions(sourceBase: int, destinationBase: int):
+def ValidateBasesForSuccessiveDivisionsMethod(sourceBase: int, destinationBase: int):
+    """
+    This function validates two bases for the conversions using the successive divisions method
+    :param sourceBase: an integer representing the source base
+    :param destinationBase: an integer representing the destination base
+    :return: -, if no exceptions are raised
+    :raise: an exception with the string message "Error: The source base should be greater or equal than the
+            destination base!", if the source base is less than the destination base
+    """
+
     if sourceBase < destinationBase:
         raise Exception(ui.HandleErrors(5))
 
 
 def ValidateBasesForSubstitutionMethod(sourceBase: int, destinationBase: int):
+    """
+    This function validates two bases for the conversions using the substitution method
+    :param sourceBase: an integer representing the source base
+    :param destinationBase: an integer representing the destination base
+    :return: -, if no exceptions are raised
+    :raise: an exception with the string message "Error: The source base should be less or equal than the
+            destination base!", if the source base is greater than the destination base
+    """
+
     if sourceBase > destinationBase:
         raise Exception(ui.HandleErrors(6))
 
 
-def ValidateBasesForRapidConversions(sourceBase: int, destinationBase: int):
+def ValidateBasesForRapidConversionsMethod(sourceBase: int, destinationBase: int):
+    """
+    This function validates two bases for the conversions using the rapid conversion method
+    :param sourceBase: an integer representing the source base
+    :param destinationBase: an integer representing the destination base
+    :return: -, if no exceptions are raised
+    :raise: an exception with the string message "Error: Cannot do rapid conversions using the provided bases!", if
+            one of the bases does not belong to the set {2, 4, 8, 16}, or if one of the bases is not 2
+    """
+
     if sourceBase != 2 and sourceBase != 4 and sourceBase != 8 and sourceBase != 16:
         raise Exception(ui.HandleErrors(7))
     if destinationBase != 2 and destinationBase != 4 and destinationBase != 8 and destinationBase != 16:
@@ -368,11 +535,29 @@ def ValidateBasesForRapidConversions(sourceBase: int, destinationBase: int):
 
 
 def ValidateOperandsForMultiplication(x: str, y: str):
+    """
+    This function validates two operands for multiplications
+    :param x: a string representing the first operand
+    :param y: a string representing the second operand
+    :return: -, if no exceptions are raised
+    :raise: an exception with the string message "Error: At least one of the operands should have one digit in the
+            hexadecimal format!", if at least one of the operands is not composed of a single hexadecimal digit
+    """
+
     if IsHexadecimal(x) == False and IsHexadecimal(y) == False:
         raise Exception(ui.HandleErrors(4))
 
 
-def ValidateOperandsForDivision(y: str):
+def ValidateOperandForDivision(y: str):
+    """
+    This function validates an operand for divisions
+    :param y: a string representing the operand
+    :return: -, if no exceptions are raised
+    :raise: - an exception with the string message "Error: The divisor should have one digit!", if the number is not
+              composed of a single hexadecimal digit
+            - an exception with the string message :Error: Cannot divide by 0!", if the number is "0"
+    """
+
     if IsHexadecimal(y) == False:
         raise Exception(ui.HandleErrors(8))
     if y == "0":
@@ -380,6 +565,14 @@ def ValidateOperandsForDivision(y: str):
 
 
 def HexaToDecimal(s: str) -> int:
+    """
+    This function converts a hexadecimal digit to its correspondent in base 10
+    The hexadecimal digit should belong to the set {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'A', 'b',
+                                                    'B', 'c', 'C', 'd', 'D', 'e', 'E', 'f', 'F'}
+    :param s: a string representing the hexadecimal digit
+    :return: an integer representing the hexadecimal digit's correspondent in base 10
+    """
+
     if (s == '0' or s == '1' or s == '2' or s == '3' or s == '4' or
         s == '5' or s == '6' or s == '7' or s == '8' or s == '9'):
         return int(s)
@@ -398,6 +591,13 @@ def HexaToDecimal(s: str) -> int:
 
 
 def DecimalToHexa(num: int) -> str:
+    """
+    This function converts a decimal number to a hexadecimal digit
+    The decimal number should be between 0 and 15
+    :param num: an integer representing the decimal number
+    :return: a string representing the hexadecimal digit
+    """
+
     if 0 <= num and num <= 9:
         return str(num)
     elif num == 10:
@@ -415,6 +615,12 @@ def DecimalToHexa(num: int) -> str:
 
 
 def IsHexadecimal(s: str) -> bool:
+    """
+    This function checks is a string is a hexadecimal digit
+    :param s: a string
+    :return: True if the string is a hexadecimal digit, False otherwise
+    """
+
     return (s == '0' or s == '1' or s == '2' or s == '3' or
             s == '4' or s == '5' or s == '6' or s == '7' or
             s == '8' or s == '9' or s == 'A' or s == 'a' or
